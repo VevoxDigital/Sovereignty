@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.vevox.mc</groupId>
+    <artifactId>sovereignty</artifactId>
+    <version>0.0.1-r01</version>
+    <modules>
+        <module>spigot</module>
+        <module>core</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
+    <name>Sovereignty</name>
+    <description>Let's be civilized about this.</description>
+
+    <organization>
+        <name>Vevox Digital</name>
+        <url>https://github.com/VevoxDigital</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>CynicalBusiness</id>
+            <name>Matthew Struble</name>
+            <email>matt@vevox.io</email>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}-${project.version}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
