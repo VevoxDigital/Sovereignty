@@ -12,6 +12,8 @@
     <version>${project.parent.version}-core</version>
     <artifactId>sovereignty.core</artifactId>
 
+    <name>Sovereignty-Core</name>
+
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>

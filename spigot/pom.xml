@@ -12,6 +12,8 @@
     <version>${project.parent.version}-spigot</version>
     <artifactId>sovereignty.spigot</artifactId>
 
+    <name>Sovereignty-Spigot</name>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
