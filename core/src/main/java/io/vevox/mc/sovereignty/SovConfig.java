@@ -1,6 +1,7 @@
 package io.vevox.mc.sovereignty;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -12,29 +13,35 @@ public class SovConfig {
 
   private static final Properties config = new Properties();
 
-  public static final boolean CONFIGURATION_SUCCESS;
+  static final boolean CONFIGURATION_SUCCESS;
+
+  /**
+   * Project name from pom.xml: `project.name`
+   */
+  public static final String NAME,
+
+  /**
+   * Project version from pom.xml: `project.version`
+   */
+  VERSION;
+
 
   // load configuration data from `module.properties`
   static {
     boolean success;
     try {
-      config.load(SovConfig.class.getResourceAsStream("module.properties"));
+      config.load(ClassLoader.getSystemClassLoader().getResourceAsStream("module.properties"));
       success = true;
     } catch (IOException e) {
       e.printStackTrace();
       success = false;
     }
     CONFIGURATION_SUCCESS = success;
+
+    NAME = config.getProperty("name");
+    VERSION = config.getProperty("version");
   }
 
-  /**
-   * Project name from pom.xml: `project.name`
-   */
-  public static final String NAME = config.getProperty("name"),
 
-  /**
-   * Project version from pom.xml: `project.version`
-   */
-  VERSION = config.getProperty("version");
 
 }
