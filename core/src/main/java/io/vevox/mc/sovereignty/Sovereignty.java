@@ -28,7 +28,7 @@ public class Sovereignty {
    * @throws ClassNotFoundException If the mapped class does not exist
    */
   @SuppressWarnings("unchecked")
-  public Sovereignty deserialize(byte[] data) throws IOException, ClassNotFoundException {
+  public static Sovereignty deserialize(byte[] data) throws IOException, ClassNotFoundException {
     ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(SovUtils.decompress(data)));
     Map<String, Object> map = (Map<String, Object>) in.readObject();
     in.close();
@@ -43,7 +43,7 @@ public class Sovereignty {
    * @return The Sovereignty
    * @throws IllegalArgumentException If the map is not a valid Sovereignty
    */
-  public Sovereignty unmap(Map<String, Object> map) throws IllegalArgumentException {
+  public static Sovereignty unmap(Map<String, Object> map) throws IllegalArgumentException {
     if (!map.containsKey("format") || !(map.get("format") instanceof Integer))
       throw new IllegalArgumentException("missing or invalid format");
 
@@ -60,7 +60,7 @@ public class Sovereignty {
     }
   }
 
-  public Sovereignty create() {
+  public static Sovereignty create() {
     return new Sovereignty(UUID.randomUUID());
   }
 
@@ -98,7 +98,7 @@ public class Sovereignty {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     ObjectOutputStream o = new ObjectOutputStream(out);
     o.writeObject(map());
-    return out.toByteArray();
+    return SovUtils.compress(out.toByteArray());
   }
 
 }
