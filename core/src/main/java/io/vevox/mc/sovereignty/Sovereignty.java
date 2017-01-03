@@ -1,7 +1,5 @@
 package io.vevox.mc.sovereignty;
 
-import sun.misc.IOUtils;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
