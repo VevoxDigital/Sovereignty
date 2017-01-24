@@ -1,5 +1,6 @@
 package io.vevox.mc.sovereignty;
 
+import io.vevox.mc.sovereignty.sov.Sovereignty;
 import org.junit.Test;
 
 import java.io.IOException;
