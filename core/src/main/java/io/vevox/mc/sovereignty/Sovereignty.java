@@ -40,22 +40,22 @@ public class Sovereignty {
    *
    * @return The Sovereignty
    * @throws IllegalArgumentException If the map is not a valid Sovereignty
+   * @throws UnknownMappingFormatException If the mapping format is unknown.
    */
-  public static Sovereignty unmap(Map<String, Object> map) throws IllegalArgumentException {
-    if (!map.containsKey("format") || !(map.get("format") instanceof Integer))
+  public static Sovereignty unmap(Map<String, Object> map) throws IllegalArgumentException, UnknownMappingFormatException {
+    if (!map.containsKey("$format") || !(map.get("$format") instanceof Integer))
       throw new IllegalArgumentException("missing or invalid format");
 
-    switch ((int) map.get("format")) {
+    Sovereignty sov = new Sovereignty(UUID.fromString((String) map.get("uuid")));
+
+    switch ((int) map.get("$format")) {
       case 1:
-
-        if (!map.containsKey("uuid") || !(map.get("uuid") instanceof UUID))
-          throw new IllegalArgumentException("invalid or missing UUID");
-
-        return new Sovereignty((UUID) map.get("uuid"));
-
-      default:
-        throw new IllegalArgumentException("unknown mapping format: " + map.get("format"));
+        // TODO
+        break;
+      default: throw new UnknownMappingFormatException((int) map.get("$format"));
     }
+
+    return sov;
   }
 
   public static Sovereignty create() {
@@ -79,9 +79,9 @@ public class Sovereignty {
    */
   public Map<String, Object> map() {
     Map<String, Object> map = new HashMap<>();
+    map.put("$format", MAPPING_FORMAT);
 
-    map.put("uuid", uuid);
-    map.put("format", MAPPING_FORMAT);
+    map.put("uuid", uuid.toString());
 
     return map;
   }
