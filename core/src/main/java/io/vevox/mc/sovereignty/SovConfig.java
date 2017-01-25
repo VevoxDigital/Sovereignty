@@ -1,7 +1,12 @@
 package io.vevox.mc.sovereignty;
 
+import io.vevox.mc.sovereignty.sov.SovPlayer;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.util.Properties;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Constants and configuration data for the core module.
@@ -24,6 +29,17 @@ public class SovConfig {
    */
   VERSION;
 
+  /**
+   * A {@link Predicate} for determining if a player is online.
+   */
+  @Nullable
+  public static Predicate<SovPlayer> playerOnlinePredicate;
+
+  /**
+   * A {@link Function} for fetching the player's name. Only called if the player is online.
+   */
+  @Nullable
+  public static Function<SovPlayer, String> playerNameFunction;
 
   // load configuration data from `module.properties`
   static {
@@ -40,7 +56,6 @@ public class SovConfig {
     NAME = config.getProperty("name");
     VERSION = config.getProperty("version");
   }
-
 
 
 }

@@ -1,12 +1,12 @@
 package io.vevox.mc.sovereignty.sov;
 
 import io.vevox.mc.sovereignty.SovUtils;
-import io.vevox.mc.sovereignty.UnknownMappingFormatException;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * @author Matthew Struble
@@ -39,9 +39,43 @@ public class Sovereignty implements Serializable {
    */
   public final UUID uuid;
 
+  private final Set<SovPlayer> players;
+
   private Sovereignty(UUID uuid) {
     this.uuid = uuid;
+    players = new HashSet<>();
   }
+
+  /**
+   * Gets an {@link Optional} which would contain the {@link SovPlayer} if one by the
+   * given uuid is present.
+   *
+   * @param uuid The uuid to search for
+   *
+   * @return The optional player
+   */
+  @NotNull
+  public Optional<SovPlayer> getPlayer(@NotNull UUID uuid) {
+    return players.stream().filter(p -> p.uuid.equals(uuid)).findAny();
+  }
+
+  /**
+   * Creates a new {@link SovPlayer} from the given uuid and adds it to this {@link Sovereignty}
+   *
+   * @param uuid The uuid to create with
+   *
+   * @return The player that was added, or the existing one if already present
+   */
+  @NotNull
+  public SovPlayer addPlayer(@NotNull UUID uuid) {
+    if (getPlayer(uuid).isPresent()) return getPlayer(uuid).get();
+
+    SovPlayer player = new SovPlayer(uuid, this);
+    player.updateName();
+    players.add(player);
+    return player;
+  }
+
 
   /**
    * Serializes this Sovereignty to a compressed binary array.
