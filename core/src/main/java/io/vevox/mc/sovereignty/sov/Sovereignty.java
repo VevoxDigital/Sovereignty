@@ -5,8 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * @author Matthew Struble
