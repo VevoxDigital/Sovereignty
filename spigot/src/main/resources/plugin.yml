@@ -1,0 +1,7 @@
+name: ${name}
+version: ${version}
+main: ${groupId}.${artifactId}.${name}
+
+author: ${organization.name}
+website: ${organization.url}
+description: ${description}
