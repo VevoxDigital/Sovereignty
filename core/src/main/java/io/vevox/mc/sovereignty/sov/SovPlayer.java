@@ -44,6 +44,7 @@ public class SovPlayer implements Serializable {
    */
   @SuppressWarnings("ConstantConditions")
   public void updateName() {
+    if (!online()) return;
     name = SovConfig.playerNameFunction != null ? SovConfig.playerNameFunction.apply(this) : uuid.toString();
   }
 
